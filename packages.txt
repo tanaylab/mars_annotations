@@ -1,0 +1,7 @@
+data.table
+dplyr
+igraph
+R.utils
+stringr
+tidyr
+github::tanaylab/misha@4.0.10
