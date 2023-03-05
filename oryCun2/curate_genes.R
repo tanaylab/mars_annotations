@@ -5,6 +5,7 @@ umis_dir <- "/net/mraid14/export/tgdata/db/tgdb/mars_runs/stelzer_gene_annot/pla
 annots_file <- "/net/mraid14/export/tgdata/db/tgdb/mars_runs/stelzer_gene_annot/work/210426_03/scdb_oryCun2/annotations/gene_intervals_oryCun2.txt"
 
 
+# +
 # library(metacell)
 # dataset_table_fn <- "/net/mraid14/export/tgdata/users/atanay/proj/rabemb/config/samp_key_190421.txt"
 # scdb_init("scrna_db", force_reinit=T)
@@ -13,6 +14,7 @@ annots_file <- "/net/mraid14/export/tgdata/db/tgdb/mars_runs/stelzer_gene_annot/
 #                      base_dir = umis_dir,
 #                      patch_cell_name = TRUE,
 #                      force=TRUE)
+# -
 
 
 umi_files <- list.files(umis_dir, full.names=TRUE)
@@ -70,7 +72,7 @@ mars_types <- mars_types %>%
         new_name = ifelse(is.na(new_name) & other == "", gene_name_long, new_name)
     ) %>%     
     mutate(new_name = ifelse(new_name == '', NA, new_name))
-    
+
 # if we have a single "other" name - use it. 
 mars_types <- mars_types %>%         
     mutate(new_name = ifelse(is.na(new_name) & !grepl(";", other) & !is.na(other), other, new_name)) 
@@ -125,4 +127,4 @@ fwrite(new_gene_annots, "curated_gene_annots.tsv", sep="\t")
 ercc_intervs <- fread('ERCC_intervals.tsv.gz') %>% as_tibble()
 
 fwrite(bind_rows(new_gene_annots, ercc_intervs), "gene_intervals_oryCun2_with_ERCC_curated.txt", sep="\t", quote=FALSE)
-    
+
